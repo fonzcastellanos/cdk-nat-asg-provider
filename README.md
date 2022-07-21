@@ -63,16 +63,16 @@ At a high-level, this is how `NatAsgProvider` achieves its purpose:
 
 ### Typescript (npm)
 ```shell
-$ npm install cdk-nat-asg-provider
+npm install cdk-nat-asg-provider
 ```
 or
 ```shell
-$ yarn install cdk-nat-asg-provider
+yarn install cdk-nat-asg-provider
 ```
 
 ### Python (PyPI)
 ```shell
-$ pip install cdk-nat-asg-provider
+pip install cdk-nat-asg-provider
 ```
 
 ## Usage
@@ -88,14 +88,14 @@ The implementation is in [src/manual.integ.ts](src/manual.integ.ts). It's worth 
 To **deploy** the manual integration test, execute the `sh` script `scripts/manual-integ-test` and use the `deploy` command:
 
 ```shell
-$ ./scripts/manual-integ-test deploy <ACCOUNT> <AWS_REGION> <KEY_PAIR_NAME> [MAX_AZS]
+./scripts/manual-integ-test deploy <ACCOUNT> <AWS_REGION> <KEY_PAIR_NAME> [MAX_AZS]
 ```
 `MAX_AZs` is optional.
 
 To **destroy** the manual integration test, execute the same script with same arguments using the `destroy` command:
 
 ```shell
-$ ./scripts/manual-integ-test destroy <ACCOUNT> <AWS_REGION> <KEY_PAIR_NAME> [MAX_AZS]
+./scripts/manual-integ-test destroy <ACCOUNT> <AWS_REGION> <KEY_PAIR_NAME> [MAX_AZS]
 ```
 
 ## Project Configuration via Projen
