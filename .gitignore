@@ -30,6 +30,8 @@ jspm_packages/
 *.tgz
 .yarn-integrity
 .cache
+cdk.out
+cdk.context.json
 !/.projenrc.js
 /test-reports/
 junit.xml
@@ -50,3 +52,12 @@ junit.xml
 .jsii
 tsconfig.json
 !/API.md
+test/.tmp
+test/sanity.integ.snapshot/asset.*
+test/sanity.integ.snapshot/**/asset.*
+test/sanity.integ.snapshot/cdk.out
+test/sanity.integ.snapshot/**/cdk.out
+test/sanity.integ.snapshot/manifest.json
+test/sanity.integ.snapshot/**/manifest.json
+test/sanity.integ.snapshot/tree.json
+test/sanity.integ.snapshot/**/tree.json

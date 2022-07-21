@@ -1,0 +1,47 @@
+#!/bin/sh
+
+usage () {
+  printf "Usage: \n"
+  printf "  ./scripts/manual-integ-test deploy account region key_pair [max_azs]\n"
+  printf "  ./scripts/manual-integ-test destroy account region key_pair [max_azs]\n"
+}
+
+die () { 
+  printf "$1\n" >&2
+  exit 1
+}
+
+die_usage () {
+  printf "$1\n" >&2
+  usage >&2
+  exit 1
+}
+
+readonly TEST_APP=lib/manual.integ.js
+
+if [ ! -r $TEST_APP ]; then 
+  die "Manual test app file $TEST_APP does not exist or permission to read it will not be granted."
+fi
+
+if [ $# -lt 4 ]; then
+  die_usage "Insufficient arguments were provided."
+fi
+
+readonly CMD=$1
+
+export CDK_DEPLOY_ACCOUNT=$2
+export CDK_DEPLOY_REGION=$3
+
+readonly KEY_PAIR=$4
+readonly MAX_AZS=$5
+
+case $CMD in
+  deploy|destroy) 
+    ;;
+  *) 
+    die_usage "Invalid command $CMD"
+    ;;
+esac
+
+npx cdk --app "node $TEST_APP $KEY_PAIR $MAX_AZS" $CMD ||
+  die "Failed to $CMD"

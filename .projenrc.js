@@ -1,15 +1,40 @@
 const { awscdk } = require('projen');
-const project = new awscdk.AwsCdkConstructLibrary({
-  author: 'Alfonso Castellanos',
-  authorAddress: 'acastellanos34@gmail.com',
-  cdkVersion: '2.1.0',
-  defaultReleaseBranch: 'main',
-  name: 'cdk-nat-asg-provider',
-  repositoryUrl: 'https://github.com/acastellanos34/cdk-nat-asg-provider.git',
 
-  // deps: [],                /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],             /* Build dependencies for this module. */
-  // packageName: undefined,  /* The "name" in package.json. */
+const PROJECT_NAME = 'cdk-nat-asg-provider';
+
+const COMMON_IGNORE = ['cdk.out', 'cdk.context.json'];
+
+const project = new awscdk.AwsCdkConstructLibrary({
+  name: PROJECT_NAME,
+  authorName: 'Alfonso Castellanos',
+  authorEmail: 'dev@alfonsocastellanos.com',
+  description: 'An AWS CDK library providing NAT instances that are each placed in their own auto scaling group to improve fault tolerance and availability.',
+  cdkVersion: '2.26.0',
+  defaultReleaseBranch: 'main',
+  repositoryUrl: 'https://github.com/fonzcastellanos/cdk-nat-asg-provider.git',
+  keywords: [
+    'aws',
+    'awscdk',
+    'aws-cdk',
+    'nat',
+    'asg',
+    'network address translation',
+    'auto scaling group',
+    'ec2',
+    'nat provider',
+    'nat instance',
+    'NatProvider',
+    'NatInstanceProvider',
+    'NatAsgInstanceProvider',
+    'NatAsgProvider'
+  ],
+  python: {
+    distName: PROJECT_NAME,
+    module: PROJECT_NAME.split('-').join('_'),
+  },
+  stability: 'experimental',
+  gitignore: COMMON_IGNORE,
+  npmignore: COMMON_IGNORE,
 });
+
 project.synth();

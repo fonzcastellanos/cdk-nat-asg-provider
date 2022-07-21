@@ -130,6 +130,78 @@
         }
       ]
     },
+    "integ:sanity:assert": {
+      "name": "integ:sanity:assert",
+      "description": "assert the snapshot of integration test 'sanity'",
+      "steps": [
+        {
+          "exec": "[ -d \"test/sanity.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'sanity'. Run 'projen integ:sanity:deploy' to capture.\" && exit 1)"
+        },
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/sanity.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/.tmp/sanity.integ/assert.cdk.out > /dev/null"
+        },
+        {
+          "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/sanity.integ.snapshot/ test/.tmp/sanity.integ/assert.cdk.out/"
+        }
+      ]
+    },
+    "integ:sanity:deploy": {
+      "name": "integ:sanity:deploy",
+      "description": "deploy integration test 'sanity' and capture snapshot",
+      "steps": [
+        {
+          "exec": "rm -fr test/.tmp/sanity.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/sanity.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/.tmp/sanity.integ/deploy.cdk.out"
+        },
+        {
+          "exec": "rm -fr test/sanity.integ.snapshot"
+        },
+        {
+          "exec": "mv test/.tmp/sanity.integ/deploy.cdk.out test/sanity.integ.snapshot"
+        },
+        {
+          "spawn": "integ:sanity:destroy"
+        }
+      ]
+    },
+    "integ:sanity:destroy": {
+      "name": "integ:sanity:destroy",
+      "description": "destroy integration test 'sanity'",
+      "steps": [
+        {
+          "exec": "cdk destroy --app test/sanity.integ.snapshot '**' --no-version-reporting"
+        }
+      ]
+    },
+    "integ:sanity:snapshot": {
+      "name": "integ:sanity:snapshot",
+      "description": "update snapshot for integration test \"sanity\"",
+      "steps": [
+        {
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/sanity.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/sanity.integ.snapshot > /dev/null"
+        }
+      ]
+    },
+    "integ:sanity:watch": {
+      "name": "integ:sanity:watch",
+      "description": "watch integration test 'sanity' (without updating snapshots)",
+      "steps": [
+        {
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/sanity.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/.tmp/sanity.integ/deploy.cdk.out"
+        }
+      ]
+    },
+    "integ:snapshot-all": {
+      "name": "integ:snapshot-all",
+      "description": "update snapshot for all integration tests",
+      "steps": [
+        {
+          "spawn": "integ:sanity:snapshot"
+        }
+      ]
+    },
     "package": {
       "name": "package",
       "description": "Creates the distribution package",
@@ -145,6 +217,9 @@
       "steps": [
         {
           "spawn": "package:js"
+        },
+        {
+          "spawn": "package:python"
         }
       ]
     },
@@ -154,6 +229,15 @@
       "steps": [
         {
           "exec": "jsii-pacmak -v --target js"
+        }
+      ]
+    },
+    "package:python": {
+      "name": "package:python",
+      "description": "Create python language bindings",
+      "steps": [
+        {
+          "exec": "jsii-pacmak -v --target python"
         }
       ]
     },
@@ -207,6 +291,9 @@
         },
         {
           "spawn": "eslint"
+        },
+        {
+          "spawn": "integ:sanity:assert"
         }
       ]
     },
