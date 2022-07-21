@@ -98,9 +98,9 @@ To **destroy** the manual integration test, execute the same script with same ar
 ./scripts/manual-integ-test destroy <ACCOUNT> <AWS_REGION> <KEY_PAIR_NAME> [MAX_AZS]
 ```
 
-## Project Configuration via Projen
+## Project configuration via `projen`
 
-Projen synthesizes and maintains project configuration. Most of the configuration files, such as `package.json`, `.gitignore`, and those defining Github Actions workflows, are managed by Projen and are read-only. To add, remove, or modify configuration files, edit [`.projenrc.js`](.projenrc.js) and then run `npx projen`. Check out Projen's [documentation website](https://projen.io) or [GitHub repo](https://github.com/projen/projen) for more details.
+[`projen`](https://github.com/projen/projen) synthesizes and maintains project configuration. Most of the configuration files, such as `package.json`, `.gitignore`, and those defining Github Actions workflows, are managed by `projen` and are read-only. To add, remove, or modify configuration files, edit [`.projenrc.js`](.projenrc.js) and then run `npx projen`. Check out `projen`'s [documentation website](https://projen.io) for more details.
 
 ## Contributing
 
