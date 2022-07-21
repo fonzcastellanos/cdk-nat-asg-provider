@@ -26,7 +26,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'NatProvider',
     'NatInstanceProvider',
     'NatAsgInstanceProvider',
-    'NatAsgProvider'
+    'NatAsgProvider',
   ],
   python: {
     distName: PROJECT_NAME,

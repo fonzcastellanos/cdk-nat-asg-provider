@@ -18,7 +18,7 @@ const CFG_SCRIPT_PATH = path.join(__dirname, '..', 'resources', CFG_SCRIPT_NAME)
 export interface NatAsgProviderProps {
   /**
    * The EC2 instance type of the NAT instances.
-   * 
+   *
    * @see https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.InstanceType.html
    *
    * @defaultValue t2.micro
@@ -27,7 +27,7 @@ export interface NatAsgProviderProps {
 
   /**
    * The allowed traffic directions through the NAT instances.
-   * 
+   *
    * If you set this to a value other than
    * `ec2.NatTrafficDirection.INBOUND_AND_OUTBOUND`, you must
    * configure the security group for the NAT instances either by providing
@@ -35,7 +35,7 @@ export interface NatAsgProviderProps {
    * or by using the `NatAsgProvider` object's `securityGroup` or
    * `connections` properties after passing the `NatAsgProvider` object to a
    * `Vpc` object.
-   * 
+   *
    * @see https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.NatTrafficDirection.html
    *
    * @defaultValue `aws-cdk-lib.aws_ec2.NatTrafficDirection.INBOUND_AND_OUTBOUND`
@@ -44,14 +44,14 @@ export interface NatAsgProviderProps {
 
   /**
    * The name of the SSH key pair granting access to the NAT instances.
-   * 
+   *
    * @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
    */
   readonly keyPair?: string;
 
   /**
    * The security group associated with the NAT instances.
-   * 
+   *
    * @see https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.ISecurityGroup.html
    *
    * @defaultValue A security group will be created.
@@ -62,8 +62,8 @@ export interface NatAsgProviderProps {
 /**
  * `NatAsgProvider` is a NAT provider that places each NAT instance in its own
  * auto scaling group to improve fault tolerance and availability.
- * 
- * `NatAsgProvider` extends `NatProvider`: 
+ *
+ * `NatAsgProvider` extends `NatProvider`:
  * @see https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.NatProvider.html
  */
 export class NatAsgProvider extends ec2.NatProvider implements ec2.IConnectable {
@@ -73,7 +73,7 @@ export class NatAsgProvider extends ec2.NatProvider implements ec2.IConnectable 
   private sg?: ec2.ISecurityGroup;
 
   /**
-   * 
+   *
    * @param props Configuration properties.
    */
   constructor(private readonly props: NatAsgProviderProps) {
@@ -240,7 +240,7 @@ export class NatAsgProvider extends ec2.NatProvider implements ec2.IConnectable 
 
   /**
    * The network connections associated with the security group of the NAT instances.
-   * 
+   *
    * @see https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.Connections.html
    */
   public get connections(): ec2.Connections {
@@ -252,7 +252,7 @@ export class NatAsgProvider extends ec2.NatProvider implements ec2.IConnectable 
 
   /**
    * The security group associated with the NAT instances.
-   * 
+   *
    * @see https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.ISecurityGroup.html
    */
   public get securityGroup(): ec2.ISecurityGroup {
