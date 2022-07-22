@@ -1,5 +1,10 @@
 # CDK NAT ASG Provider
 
+![npm version](https://img.shields.io/npm/v/cdk-nat-asg-provider)
+![PyPi version](https://img.shields.io/pypi/v/cdk-nat-asg-provider)
+![Release](https://github.com/fonzcastellanos/cdk-nat-asg-provider/workflows/release/badge.svg)
+![License](https://img.shields.io/github/license/fonzcastellanos/cdk-nat-asg-provider)
+
 Use this [AWS Cloud Development Kit (CDK)](https://docs.aws.amazon.com/cdk/v2/guide/home.html) library to configure and deploy [Network Address Translation (NAT) instances](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_NAT_Instance.html) that are each in their own [auto scaling group (ASG)](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html) to improve fault tolerance and availability.
 
 Works with AWS CDK <strong>v2</strong>.
@@ -61,7 +66,7 @@ At a high-level, this is how `NatAsgProvider` achieves its purpose:
 
 ## Installation
 
-### Typescript (npm)
+### TypeScript (npm)
 ```shell
 npm install cdk-nat-asg-provider
 ```
@@ -90,7 +95,7 @@ To **deploy** the manual integration test, execute the `sh` script `scripts/manu
 ```shell
 ./scripts/manual-integ-test deploy <ACCOUNT> <AWS_REGION> <KEY_PAIR_NAME> [MAX_AZS]
 ```
-`MAX_AZs` is optional.
+`MAX_AZS` is optional.
 
 To **destroy** the manual integration test, execute the same script with same arguments using the `destroy` command:
 
