@@ -138,7 +138,7 @@
           "exec": "[ -d \"test/sanity.integ.snapshot\" ] || (echo \"No snapshot available for integration test 'sanity'. Run 'projen integ:sanity:deploy' to capture.\" && exit 1)"
         },
         {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/sanity.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/.tmp/sanity.integ/assert.cdk.out > /dev/null"
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/sanity.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata -o test/.tmp/sanity.integ/assert.cdk.out > /dev/null"
         },
         {
           "exec": "diff -r -x asset.* -x cdk.out -x manifest.json -x tree.json test/sanity.integ.snapshot/ test/.tmp/sanity.integ/assert.cdk.out/"
@@ -153,7 +153,7 @@
           "exec": "rm -fr test/.tmp/sanity.integ/deploy.cdk.out"
         },
         {
-          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/sanity.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/.tmp/sanity.integ/deploy.cdk.out"
+          "exec": "cdk deploy --app \"ts-node -P tsconfig.dev.json test/sanity.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata '**' --require-approval=never -o test/.tmp/sanity.integ/deploy.cdk.out"
         },
         {
           "exec": "rm -fr test/sanity.integ.snapshot"
@@ -180,7 +180,7 @@
       "description": "update snapshot for integration test \"sanity\"",
       "steps": [
         {
-          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/sanity.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata -o test/sanity.integ.snapshot > /dev/null"
+          "exec": "cdk synth --app \"ts-node -P tsconfig.dev.json test/sanity.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata -o test/sanity.integ.snapshot > /dev/null"
         }
       ]
     },
@@ -189,7 +189,7 @@
       "description": "watch integration test 'sanity' (without updating snapshots)",
       "steps": [
         {
-          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/sanity.integ.ts\" --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/.tmp/sanity.integ/deploy.cdk.out"
+          "exec": "cdk watch --app \"ts-node -P tsconfig.dev.json test/sanity.integ.ts\" --no-notices --no-version-reporting --no-asset-metadata --no-path-metadata '**' -o test/.tmp/sanity.integ/deploy.cdk.out"
         }
       ]
     },
@@ -287,22 +287,14 @@
       "description": "Run tests",
       "steps": [
         {
-          "exec": "jest --passWithNoTests --all --updateSnapshot"
+          "exec": "jest --passWithNoTests --updateSnapshot",
+          "receiveArgs": true
         },
         {
           "spawn": "eslint"
         },
         {
           "spawn": "integ:sanity:assert"
-        }
-      ]
-    },
-    "test:update": {
-      "name": "test:update",
-      "description": "Update jest snapshots",
-      "steps": [
-        {
-          "exec": "jest --updateSnapshot"
         }
       ]
     },
