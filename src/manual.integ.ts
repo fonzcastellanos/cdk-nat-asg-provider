@@ -16,7 +16,7 @@ const keyPair = args[0];
 let maxAzs: number | undefined;
 if (args.length > 1) {
   maxAzs = Number(args[1]);
-  if (maxAzs === NaN) {
+  if (Number.isNaN(maxAzs)) {
     process.stderr.write('[max_azs] argument could not be converted to a number.\n');
     process.exit(1);
   }
