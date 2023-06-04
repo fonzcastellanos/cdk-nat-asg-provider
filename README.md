@@ -5,7 +5,7 @@
 ![Release](https://github.com/fonzcastellanos/cdk-nat-asg-provider/workflows/release/badge.svg)
 ![License](https://img.shields.io/github/license/fonzcastellanos/cdk-nat-asg-provider)
 
-Use this [AWS Cloud Development Kit (CDK)](https://docs.aws.amazon.com/cdk/v2/guide/home.html) library to configure and deploy [Network Address Translation (NAT) instances](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_NAT_Instance.html) that are each in their own [auto scaling group (ASG)](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html) to improve fault tolerance and availability.
+Use this [AWS Cloud Development Kit (CDK)](https://docs.aws.amazon.com/cdk/v2/guide/home.html) library to configure and deploy [network address translation (NAT) instances](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_NAT_Instance.html) individually within their own [auto scaling group (ASG)](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html) to improve reliability and availability.
 
 Works with AWS CDK <strong>v2</strong>.
 
